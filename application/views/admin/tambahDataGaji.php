@@ -14,11 +14,12 @@
 				<div class="form-group">
 					<label>NIP Pegawai</label>
 					<select name="Pegawai_NIP" id="Pegawai_NIP" class="form-control">
-						<option value="">Pilih NIP</option>
+						<option value="">Pilih Pegawai</option>
 						<?php foreach ($pegawai as $p): ?>
-							<option value="<?php echo $p->NIP ?>" data-gaji-pokok="<?php echo $p->Gaji_Pokok ?>"
-								data-persentase-bonus="<?php echo $p->Persentase_Bonus ?>">
-								<?php echo $p->NIP . " - " . $p->Nama ?></option>
+							<option value="<?php echo $p->NIP ?>" data-gaji="<?php echo $p->Gaji_Pokok ?>"
+								data-bonus="<?php echo $p->Persentase_Bonus ?>">
+								<?php echo $p->NIP . ' - ' . $p->Nama ?>
+							</option>
 						<?php endforeach; ?>
 					</select>
 					<?php echo form_error('Pegawai_NIP', '<div class="text-small text-danger"></div>') ?>
@@ -60,6 +61,11 @@
 					<?php echo form_error('Tahun', '<div class="text-small text-danger"></div>') ?>
 				</div>
 
+				<div class="form-group">
+					<label>Aktifkan Bonus</label>
+					<input type="checkbox" id="enable_bonus">
+				</div>
+
 				<button type="submit" class="btn btn-success">Submit</button>
 
 			</form>
@@ -84,18 +90,33 @@
 	}
 
 	document.getElementById('Pegawai_NIP').addEventListener('change', function () {
-		var selectedOption = this.options[this.selectedIndex];
-		var gajiPokok = selectedOption.getAttribute('data-gaji-pokok');
-		var persentaseBonus = selectedOption.getAttribute('data-persentase-bonus');
+		const selectedOption = this.options[this.selectedIndex];
+		const gajiPokok = selectedOption.getAttribute('data-gaji');
+		const persentaseBonus = selectedOption.getAttribute('data-bonus');
+		const enableBonus = document.getElementById('enable_bonus').checked;
 
-		var bonus = gajiPokok * (persentaseBonus / 100);
-		var gajiTotal = parseFloat(gajiPokok) + parseFloat(bonus);
-		var pph = gajiTotal * 0.05;
-		var totalGaji = gajiTotal - pph;
+		const bonus = enableBonus ? (parseFloat(gajiPokok) * parseFloat(persentaseBonus) / 100) : 0;
+		const pph = (parseFloat(gajiPokok) + bonus) * 0.05;
+		const totalGaji = parseFloat(gajiPokok) + bonus - pph;
 
-		document.getElementById('Gaji_Pokok').value = formatRupiah(gajiPokok);
-		document.getElementById('Bonus').value = formatRupiah(bonus);
-		document.getElementById('PPH_5').value = formatRupiah(pph);
-		document.getElementById('Total_Gaji').value = formatRupiah(totalGaji);
+		document.getElementById('Gaji_Pokok').value = formatRupiah(gajiPokok.toString(), 'Rp. ');
+		document.getElementById('Bonus').value = formatRupiah(bonus.toFixed(2).toString(), 'Rp. ');
+		document.getElementById('PPH_5').value = formatRupiah(pph.toFixed(2).toString(), 'Rp. ');
+		document.getElementById('Total_Gaji').value = formatRupiah(totalGaji.toFixed(2).toString(), 'Rp. ');
+	});
+
+	document.getElementById('enable_bonus').addEventListener('change', function () {
+		const selectedOption = document.getElementById('Pegawai_NIP').options[document.getElementById('Pegawai_NIP').selectedIndex];
+		const gajiPokok = selectedOption.getAttribute('data-gaji');
+		const persentaseBonus = selectedOption.getAttribute('data-bonus');
+		const enableBonus = this.checked;
+
+		const bonus = enableBonus ? (parseFloat(gajiPokok) * parseFloat(persentaseBonus) / 100) : 0;
+		const pph = (parseFloat(gajiPokok) + bonus) * 0.05;
+		const totalGaji = parseFloat(gajiPokok) + bonus - pph;
+
+		document.getElementById('Bonus').value = formatRupiah(bonus.toFixed(2).toString(), 'Rp. ');
+		document.getElementById('PPH_5').value = formatRupiah(pph.toFixed(2).toString(), 'Rp. ');
+		document.getElementById('Total_Gaji').value = formatRupiah(totalGaji.toFixed(2).toString(), 'Rp. ');
 	});
 </script>

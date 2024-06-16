@@ -32,7 +32,8 @@ class DataGaji extends CI_Controller
 	{
 		$nip = $this->input->post('Pegawai_NIP');
 		$gajiPokok = (float) str_replace(['Rp.', '.'], '', $this->input->post('Gaji_Pokok'));
-		$bonus = (float) str_replace(['Rp.', '.'], '', $this->input->post('Bonus'));
+		$enableBonus = $this->input->post('enable_bonus') ? true : false;
+		$bonus = $enableBonus ? (float) str_replace(['Rp.', '.'], '', $this->input->post('Bonus')) : 0;
 		$pph = (float) str_replace(['Rp.', '.'], '', $this->input->post('PPH_5'));
 		$totalGaji = (float) str_replace(['Rp.', '.'], '', $this->input->post('Total_Gaji'));
 		$bulan = $this->input->post('Bulan');
@@ -50,13 +51,14 @@ class DataGaji extends CI_Controller
 
 		$this->GajiModel->insert_data($data, 'gaji');
 		$this->session->set_flashdata('pesan', '<div class="alert alert-success alert-dismissible fade show" role="alert">
-        <strong>Data Berhasil Ditambahkan!</strong>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>');
-		redirect('admin/dataGaji');
+			<strong>Data Berhasil Ditambahkan!</strong>
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</div>');
+		redirect('admin/DataGaji');
 	}
+
 
 	public function updateData($id)
 	{
@@ -80,10 +82,10 @@ class DataGaji extends CI_Controller
 		} else {
 			$id = $this->input->post('ID_Gaji');
 			$nip = $this->input->post('Pegawai_NIP');
-			$gajiPokok = (float) str_replace(['Rp.', '.'], '', $this->input->post('Gaji_Pokok'));
-			$bonus = (float) str_replace(['Rp.', '.'], '', $this->input->post('Bonus'));
-			$pph = (float) str_replace(['Rp.', '.'], '', $this->input->post('PPH_5'));
-			$totalGaji = (float) str_replace(['Rp.', '.'], '', $this->input->post('Total_Gaji'));
+			$gajiPokok = str_replace('.', '', str_replace('Rp. ', '', $this->input->post('Gaji_Pokok')));
+			$bonus = str_replace('.', '', str_replace('Rp. ', '', $this->input->post('Bonus')));
+			$pph = str_replace('.', '', str_replace('Rp. ', '', $this->input->post('PPH_5')));
+			$totalGaji = str_replace('.', '', str_replace('Rp. ', '', $this->input->post('Total_Gaji')));
 			$bulan = $this->input->post('Bulan');
 			$tahun = $this->input->post('Tahun');
 
@@ -101,14 +103,15 @@ class DataGaji extends CI_Controller
 
 			$this->GajiModel->update_data('gaji', $data, $where);
 			$this->session->set_flashdata('pesan', '<div class="alert alert-success alert-dismissible fade show" role="alert">
-        <strong>Data Berhasil Diupdate!</strong>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>');
+				<strong>Data Berhasil Diupdate!</strong> 
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>');
 			redirect('admin/dataGaji');
 		}
 	}
+
 
 	public function deleteData($id)
 	{
