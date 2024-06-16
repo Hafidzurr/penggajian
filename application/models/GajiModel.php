@@ -15,6 +15,11 @@ class GajiModel extends CI_Model
 		}
 	}
 
+	public function get_data_where($table, $where)
+	{
+		return $this->db->get_where($table, $where)->result();
+	}
+
 	public function insert_data($data, $table)
 	{
 		$this->db->insert($table, $data);

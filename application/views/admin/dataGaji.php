@@ -26,10 +26,10 @@
 				<td><?php echo $no++ ?></td>
 				<td><?php echo $g->Nama_Pegawai ?></td>
 				<td><?php echo $g->Nama_Jabatan ?></td>
-				<td><?php echo $g->Gaji_Pokok ?></td>
-				<td><?php echo $g->Bonus ?></td>
-				<td><?php echo $g->PPH_5 ?></td>
-				<td><?php echo $g->Total_Gaji ?></td>
+				<td>Rp. <?php echo number_format($g->Gaji_Pokok, 0, ',', '.') ?></td>
+				<td>Rp. <?php echo number_format($g->Bonus, 0, ',', '.') ?></td>
+				<td>Rp. <?php echo number_format($g->PPH_5, 0, ',', '.') ?></td>
+				<td>Rp. <?php echo number_format($g->Total_Gaji, 0, ',', '.') ?></td>
 				<td><?php echo $g->Bulan ?></td>
 				<td><?php echo $g->Tahun ?></td>
 				<td>
