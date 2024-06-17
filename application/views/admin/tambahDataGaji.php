@@ -14,7 +14,6 @@
 				<div class="form-group">
 					<label>NIP Pegawai</label>
 					<select name="Pegawai_NIP" id="Pegawai_NIP" class="form-control">
-						<option value="">Pilih Pegawai</option>
 						<?php foreach ($pegawai as $p): ?>
 							<option value="<?php echo $p->NIP ?>" data-gaji="<?php echo $p->Gaji_Pokok ?>"
 								data-bonus="<?php echo $p->Persentase_Bonus ?>">
@@ -35,6 +34,7 @@
 					<label>Bonus</label>
 					<input type="text" name="Bonus" id="Bonus" class="form-control" readonly>
 					<?php echo form_error('Bonus', '<div class="text-small text-danger"></div>') ?>
+					<input type="checkbox" id="enable_bonus"> Aktifkan Bonus
 				</div>
 
 				<div class="form-group">
@@ -50,20 +50,9 @@
 				</div>
 
 				<div class="form-group">
-					<label>Bulan</label>
-					<input type="text" name="Bulan" class="form-control">
-					<?php echo form_error('Bulan', '<div class="text-small text-danger"></div>') ?>
-				</div>
-
-				<div class="form-group">
-					<label>Tahun</label>
-					<input type="text" name="Tahun" class="form-control">
-					<?php echo form_error('Tahun', '<div class="text-small text-danger"></div>') ?>
-				</div>
-
-				<div class="form-group">
-					<label>Aktifkan Bonus</label>
-					<input type="checkbox" id="enable_bonus">
+					<label>Tanggal Gajian</label>
+					<input type="date" name="Tanggal_Gajian" class="form-control">
+					<?php echo form_error('Tanggal_Gajian', '<div class="text-small text-danger"></div>') ?>
 				</div>
 
 				<button type="submit" class="btn btn-success">Submit</button>
@@ -99,10 +88,10 @@
 		const pph = (parseFloat(gajiPokok) + bonus) * 0.05;
 		const totalGaji = parseFloat(gajiPokok) + bonus - pph;
 
-		document.getElementById('Gaji_Pokok').value = formatRupiah(gajiPokok.toString(), 'Rp. ');
-		document.getElementById('Bonus').value = formatRupiah(bonus.toFixed(2).toString(), 'Rp. ');
-		document.getElementById('PPH_5').value = formatRupiah(pph.toFixed(2).toString(), 'Rp. ');
-		document.getElementById('Total_Gaji').value = formatRupiah(totalGaji.toFixed(2).toString(), 'Rp. ');
+		document.getElementById('Gaji_Pokok').value = formatRupiah(gajiPokok.toString());
+		document.getElementById('Bonus').value = formatRupiah(bonus.toFixed(2).toString());
+		document.getElementById('PPH_5').value = formatRupiah(pph.toFixed(2).toString());
+		document.getElementById('Total_Gaji').value = formatRupiah(totalGaji.toFixed(2).toString());
 	});
 
 	document.getElementById('enable_bonus').addEventListener('change', function () {
@@ -115,8 +104,25 @@
 		const pph = (parseFloat(gajiPokok) + bonus) * 0.05;
 		const totalGaji = parseFloat(gajiPokok) + bonus - pph;
 
-		document.getElementById('Bonus').value = formatRupiah(bonus.toFixed(2).toString(), 'Rp. ');
-		document.getElementById('PPH_5').value = formatRupiah(pph.toFixed(2).toString(), 'Rp. ');
-		document.getElementById('Total_Gaji').value = formatRupiah(totalGaji.toFixed(2).toString(), 'Rp. ');
+		document.getElementById('Bonus').value = formatRupiah(bonus.toFixed(2).toString());
+		document.getElementById('PPH_5').value = formatRupiah(pph.toFixed(2).toString());
+		document.getElementById('Total_Gaji').value = formatRupiah(totalGaji.toFixed(2).toString());
+	});
+
+	// Initial calculation for pre-filled values
+	document.addEventListener('DOMContentLoaded', function () {
+		const selectedOption = document.getElementById('Pegawai_NIP').options[document.getElementById('Pegawai_NIP').selectedIndex];
+		const gajiPokok = selectedOption.getAttribute('data-gaji');
+		const persentaseBonus = selectedOption.getAttribute('data-bonus');
+		const enableBonus = document.getElementById('enable_bonus').checked;
+
+		const bonus = enableBonus ? (parseFloat(gajiPokok) * parseFloat(persentaseBonus) / 100) : 0;
+		const pph = (parseFloat(gajiPokok) + bonus) * 0.05;
+		const totalGaji = parseFloat(gajiPokok) + bonus - pph;
+
+		document.getElementById('Gaji_Pokok').value = formatRupiah(gajiPokok.toString());
+		document.getElementById('Bonus').value = formatRupiah(bonus.toFixed(2).toString());
+		document.getElementById('PPH_5').value = formatRupiah(pph.toFixed(2).toString());
+		document.getElementById('Total_Gaji').value = formatRupiah(totalGaji.toFixed(2).toString());
 	});
 </script>

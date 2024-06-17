@@ -16,8 +16,7 @@
 			<th class="text-center">Bonus</th>
 			<th class="text-center">PPH 5%</th>
 			<th class="text-center">Total Gaji</th>
-			<th class="text-center">Bulan</th>
-			<th class="text-center">Tahun</th>
+			<th class="text-center">Tanggal Gajian</th>
 			<th class="text-center">Action</th>
 		</tr>
 		<?php $no = 1;
@@ -30,8 +29,7 @@
 				<td>Rp. <?php echo number_format($g->Bonus, 0, ',', '.') ?></td>
 				<td>Rp. <?php echo number_format($g->PPH_5, 0, ',', '.') ?></td>
 				<td>Rp. <?php echo number_format($g->Total_Gaji, 0, ',', '.') ?></td>
-				<td><?php echo $g->Bulan ?></td>
-				<td><?php echo $g->Tahun ?></td>
+				<td><?php echo date('d-m-Y', strtotime($g->Tanggal_Gajian)) ?></td>
 				<td>
 					<center>
 						<a class="btn btn-sm btn-primary"

@@ -45,5 +45,30 @@ class GajiModel extends CI_Model
 		$query = $this->db->get();
 		return $query->result();
 	}
+
+	public function getGajiByDate($bulan, $tahun)
+	{
+		$this->db->select('gaji.*, pegawai.Nama as Nama_Pegawai, jabatan.Nama_Jabatan');
+		$this->db->from('gaji');
+		$this->db->join('pegawai', 'gaji.Pegawai_NIP = pegawai.NIP');
+		$this->db->join('jabatan', 'pegawai.Jabatan_ID = jabatan.ID_Jabatan');
+		if ($bulan && $tahun) {
+			$this->db->where('MONTH(gaji.Tanggal_Gajian)', $bulan);
+			$this->db->where('YEAR(gaji.Tanggal_Gajian)', $tahun);
+		}
+		$query = $this->db->get();
+		return $query->result();
+	}
+
+	public function getSlipGajiByNIP($nip)
+	{
+		$this->db->select('gaji.*, pegawai.Nama as Nama_Pegawai,jabatan.Bidang, jabatan.Nama_Jabatan, pegawai.NIP, jabatan.Gaji_Pokok');
+		$this->db->from('gaji');
+		$this->db->join('pegawai', 'gaji.Pegawai_NIP = pegawai.NIP');
+		$this->db->join('jabatan', 'pegawai.Jabatan_ID = jabatan.ID_Jabatan');
+		$this->db->where('pegawai.NIP', $nip);
+		$query = $this->db->get();
+		return $query->row();
+	}
 }
 ?>

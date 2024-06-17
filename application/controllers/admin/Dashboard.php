@@ -6,18 +6,21 @@ class Dashboard extends CI_Controller
 	{
 		$data['title'] = "Dashboard";
 
-		$pegawai = $this->db->query("SELECT * FROM pegawai");
-		$data['pegawai'] = $pegawai->num_rows();
+		// Hitung jumlah pegawai
+		$pegawai = $this->db->query("SELECT COUNT(DISTINCT NIP) AS total_pegawai FROM pegawai");
+		$data['pegawai'] = $pegawai->row()->total_pegawai;
 
-		$HRD = $this->db->query("SELECT * FROM jabatan WHERE Bidang = 'HRD'");
-		$data['hrd'] = $HRD->num_rows();
+		// Hitung jumlah bidang tanpa duplikasi
+		$bidang = $this->db->query("SELECT COUNT(DISTINCT Bidang) AS total_bidang FROM jabatan");
+		$data['bidang'] = $bidang->row()->total_bidang;
 
-		$jabatan = $this->db->query("SELECT * FROM jabatan");
-		$data['jabatan'] = $jabatan->num_rows();
+		// Hitung jumlah jabatan tanpa duplikasi
+		$jabatan = $this->db->query("SELECT COUNT(DISTINCT Nama_Jabatan) AS total_jabatan FROM jabatan");
+		$data['jabatan'] = $jabatan->row()->total_jabatan;
 
-		$admin = $this->db->query("SELECT * FROM pengguna WHERE Role = 'admin'");
-		$data['admin'] = $admin->num_rows();
-
+		// Hitung jumlah admin
+		$admin = $this->db->query("SELECT COUNT(DISTINCT ID_Pengguna) AS total_admin FROM pengguna WHERE Role = 'admin'");
+		$data['admin'] = $admin->row()->total_admin;
 
 		$this->load->view('templates_admin/header', $data);
 		$this->load->view('templates_admin/sidebar');
