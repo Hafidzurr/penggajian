@@ -21,6 +21,16 @@
 			<form method="POST" action="<?php echo base_url('admin/dataPengguna/tambahDataAksi') ?>">
 
 				<div class="form-group">
+					<label>Nama dan NIP</label>
+					<select name="Pegawai_NIP" class="form-control">
+						<?php foreach ($pegawai as $p): ?>
+							<option value="<?php echo $p->NIP ?>"><?php echo $p->Nama . ' - ' . $p->NIP ?></option>
+						<?php endforeach; ?>
+					</select>
+					<?php echo form_error('Pegawai_NIP', '<div class="text-small text-danger"></div>') ?>
+				</div>
+
+				<div class="form-group">
 					<label>Username</label>
 					<input type="text" name="Username" class="form-control">
 					<?php echo form_error('Username', '<div class="text-small text-danger"></div>') ?>
@@ -40,14 +50,12 @@
 
 				<div class="form-group">
 					<label>Role</label>
-					<input type="text" name="Role" class="form-control">
+					<select name="Role" class="form-control">
+						<option value="admin">Admin</option>
+						<option value="pegawai">Pegawai</option>
+						<option value="hrd">HRD</option>
+					</select>
 					<?php echo form_error('Role', '<div class="text-small text-danger"></div>') ?>
-				</div>
-
-				<div class="form-group">
-					<label>NIP</label>
-					<input type="text" name="Pegawai_NIP" class="form-control">
-					<?php echo form_error('Pegawai_NIP', '<div class="text-small text-danger"></div>') ?>
 				</div>
 
 				<button type="submit" class="btn btn-success">Submit</button>

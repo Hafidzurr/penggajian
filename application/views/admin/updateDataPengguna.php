@@ -13,6 +13,18 @@
 				<form method="POST" action="<?php echo base_url('admin/dataPengguna/updateDataAksi') ?>">
 
 					<div class="form-group">
+						<label>Nama dan NIP</label>
+						<select name="Pegawai_NIP" class="form-control">
+							<?php foreach ($pegawai as $p): ?>
+								<option value="<?php echo $p->NIP ?>" <?php echo ($i->Pegawai_NIP == $p->NIP) ? 'selected' : ''; ?>>
+									<?php echo $p->Nama . ' - ' . $p->NIP ?>
+								</option>
+							<?php endforeach; ?>
+						</select>
+						<?php echo form_error('Pegawai_NIP', '<div class="text-small text-danger"></div>') ?>
+					</div>
+
+					<div class="form-group">
 						<label>Username</label>
 						<input type="hidden" name="ID_Pengguna" class="form-control" value="<?php echo $i->ID_Pengguna ?>">
 						<input type="text" name="Username" class="form-control" value="<?php echo $i->Username ?>">
@@ -34,14 +46,12 @@
 
 					<div class="form-group">
 						<label>Role</label>
-						<input type="text" name="Role" class="form-control" value="<?php echo $i->Role ?>">
+						<select name="Role" class="form-control">
+							<option value="admin" <?php echo ($i->Role == 'admin') ? 'selected' : ''; ?>>Admin</option>
+							<option value="pegawai" <?php echo ($i->Role == 'pegawai') ? 'selected' : ''; ?>>Pegawai</option>
+							<option value="hrd" <?php echo ($i->Role == 'hrd') ? 'selected' : ''; ?>>HRD</option>
+						</select>
 						<?php echo form_error('Role', '<div class="text-small text-danger"></div>') ?>
-					</div>
-
-					<div class="form-group">
-						<label>NIP</label>
-						<input type="text" name="Pegawai_NIP" class="form-control" value="<?php echo $i->Pegawai_NIP ?>">
-						<?php echo form_error('Pegawai_NIP', '<div class="text-small text-danger"></div>') ?>
 					</div>
 
 					<button type="submit" class="btn btn-success">Update</button>

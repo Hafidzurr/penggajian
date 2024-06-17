@@ -15,6 +15,7 @@ class DataPengguna extends CI_Controller
 	public function tambahData()
 	{
 		$data['title'] = "Tambah Data Pengguna";
+		$data['pegawai'] = $this->penggajianModel->get_data('pegawai')->result();
 		$this->load->view('templates_admin/header', $data);
 		$this->load->view('templates_admin/sidebar');
 		$this->load->view('admin/tambahDataPengguna', $data);
@@ -38,6 +39,7 @@ class DataPengguna extends CI_Controller
 			if (!$pegawai) {
 				$data['title'] = "Tambah Data Pengguna";
 				$data['error'] = "NIP Pegawai tidak ditemukan!";
+				$data['pegawai'] = $this->penggajianModel->get_data('pegawai')->result();
 				$this->load->view('templates_admin/header', $data);
 				$this->load->view('templates_admin/sidebar');
 				$this->load->view('admin/tambahDataPengguna', $data);
@@ -68,6 +70,7 @@ class DataPengguna extends CI_Controller
 		$where = array('ID_Pengguna' => $id);
 		$data['pengguna'] = $this->db->query("SELECT * FROM pengguna WHERE ID_Pengguna= '$id'")->result();
 		$data['title'] = "Update Data Pengguna";
+		$data['pegawai'] = $this->penggajianModel->get_data('pegawai')->result();
 		$this->load->view('templates_admin/header', $data);
 		$this->load->view('templates_admin/sidebar');
 		$this->load->view('admin/updateDataPengguna', $data);
@@ -93,6 +96,7 @@ class DataPengguna extends CI_Controller
 				$data['title'] = "Update Data Pengguna";
 				$data['error'] = "NIP Pegawai tidak ditemukan!";
 				$data['pengguna'] = $this->db->query("SELECT * FROM pengguna WHERE ID_Pengguna= '$id'")->result();
+				$data['pegawai'] = $this->penggajianModel->get_data('pegawai')->result();
 				$this->load->view('templates_admin/header', $data);
 				$this->load->view('templates_admin/sidebar');
 				$this->load->view('admin/updateDataPengguna', $data);
