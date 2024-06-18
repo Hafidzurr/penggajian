@@ -27,6 +27,12 @@ class Welcome extends CI_Controller
 			} else {
 				$this->session->set_userdata('Role', $cek->Role);
 				$this->session->set_userdata('Nama_Pegawai', $cek->Nama_Pegawai);
+				$this->session->set_userdata('ID_Pengguna', $cek->ID_Pengguna);
+				$this->session->set_userdata('Pegawai_NIP', $cek->Pegawai_NIP);
+
+
+
+
 
 				switch ($cek->Role) {
 					case 'admin':

@@ -74,7 +74,7 @@
 			</li>
 
 			<li class="nav-item">
-				<a class="nav-link" href="<?php echo base_url('user/gantiPassword') ?>">
+				<a class="nav-link" href="<?php echo base_url('gantiPassword') ?>">
 					<i class="fas fa-fw fa-lock"></i>
 					<span>Ganti Password</span></a>
 			</li>
