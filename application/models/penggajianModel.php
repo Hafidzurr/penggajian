@@ -37,6 +37,24 @@ class PenggajianModel extends CI_model
 		return $query->result();
 	}
 
+	public function cek_login()
+	{
+		$username = set_value('username');
+		$password = set_value('password');
 
+		$this->db->select('pengguna.*, pegawai.Nama as Nama_Pegawai');
+		$this->db->from('pengguna');
+		$this->db->join('pegawai', 'pengguna.Pegawai_NIP = pegawai.NIP', 'left');
+		$this->db->where('pengguna.Username', $username);
+		$this->db->where('pengguna.Password', $password);
+		$this->db->limit(1);
+		$result = $this->db->get();
+
+		if ($result->num_rows() > 0) {
+			return $result->row();
+		} else {
+			return FALSE;
+		}
+	}
 }
 ?>

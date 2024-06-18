@@ -19,7 +19,7 @@
 
 			<!-- Nav Item - Dashboard -->
 			<li class="nav-item">
-				<a class="nav-link" href="<?php echo base_url('admin/dashboard') ?>">
+				<a class="nav-link" href="<?php echo base_url('hrd/dashboard') ?>">
 					<i class="fas fa-fw fa-tachometer-alt"></i>
 					<span>Dashboard</span></a>
 			</li>
@@ -33,9 +33,8 @@
 				</a>
 				<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
 					<div class="bg-white py-2 collapse-inner rounded">
-						<a class="collapse-item" href="<?php echo base_url('admin/dataPegawai') ?>">Data Pegawai</a>
-						<a class="collapse-item" href="<?php echo base_url('admin/dataJabatan') ?>">Data Jabatan</a>
-						<a class="collapse-item" href="<?php echo base_url('admin/dataPengguna') ?>">Data Pengguna</a>
+						<a class="collapse-item" href="<?php echo base_url('hrd/dataPegawai') ?>">Data Pegawai</a>
+						<a class="collapse-item" href="<?php echo base_url('hrd/dataJabatan') ?>">Data Jabatan</a>
 					</div>
 				</div>
 			</li>
@@ -50,8 +49,8 @@
 				<div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
 					data-parent="#accordionSidebar">
 					<div class="bg-white py-2 collapse-inner rounded">
-						<!-- <a class="collapse-item" href="<?php echo base_url('admin/data_absensi') ?>">Data Absensi</a> -->
-						<a class="collapse-item" href="<?php echo base_url('admin/dataGaji') ?>">Data Gaji</a>
+						<!-- <a class="collapse-item" href="<?php echo base_url('hrd/data_absensi') ?>">Data Absensi</a> -->
+						<a class="collapse-item" href="<?php echo base_url('hrd/dataGaji') ?>">Data Gaji</a>
 					</div>
 				</div>
 			</li>
@@ -65,10 +64,10 @@
 				</a>
 				<div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
 					<div class="bg-white py-2 collapse-inner rounded">
-						<a class="collapse-item" href="<?php echo base_url('admin/laporanGaji') ?>">Laporan Gaji</a>
-						<a class="collapse-item" href="<?php echo base_url('admin/laporanPegawai') ?>">Laporan Data
+						<a class="collapse-item" href="<?php echo base_url('hrd/laporanGaji') ?>">Laporan Gaji</a>
+						<a class="collapse-item" href="<?php echo base_url('hrd/laporanPegawai') ?>">Laporan Data
 							Pegawai</a>
-						<a class="collapse-item" href="<?php echo base_url('admin/slipGaji') ?>">Slip Gaji</a>
+						<a class="collapse-item" href="<?php echo base_url('hrd/slipGaji') ?>">Slip Gaji</a>
 					</div>
 				</div>
 			</li>
@@ -94,8 +93,8 @@
 			<!-- Sidebar Message -->
 			<!-- <div class="sidebar-card d-none d-lg-flex">
 				<img class="sidebar-card-illustration mb-2" src="img/undraw_rocket.svg" alt="...">
-				<p class="text-center mb-2"><strong>SB Admin Pro</strong> is packed with premium features, components, and more!</p>
-				<a class="btn btn-success btn-sm" href="https://startbootstrap.com/theme/sb-admin-pro">Upgrade to Pro!</a>
+				<p class="text-center mb-2"><strong>SB hrd Pro</strong> is packed with premium features, components, and more!</p>
+				<a class="btn btn-success btn-sm" href="https://startbootstrap.com/theme/sb-hrd-pro">Upgrade to Pro!</a>
 			</div> -->
 
 		</ul>

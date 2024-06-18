@@ -5,7 +5,7 @@ class Dashboard extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
-		if ($this->session->userdata('Role') != 'admin') {
+		if ($this->session->userdata('Role') != 'HRD') {
 			$this->session->set_flashdata('pesan', '<div class="alert alert-danger alert-dismissible fade show" role="alert">
   <strong>Anda Belum Login!</strong> 
   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -31,14 +31,10 @@ class Dashboard extends CI_Controller
 		$jabatan = $this->db->query("SELECT COUNT(DISTINCT Nama_Jabatan) AS total_jabatan FROM jabatan");
 		$data['jabatan'] = $jabatan->row()->total_jabatan;
 
-		// Hitung jumlah admin
-		$admin = $this->db->query("SELECT COUNT(DISTINCT ID_Pengguna) AS total_admin FROM pengguna WHERE Role = 'admin'");
-		$data['admin'] = $admin->row()->total_admin;
-
-		$this->load->view('templates_admin/header', $data);
-		$this->load->view('templates_admin/sidebar');
-		$this->load->view('admin/dashboard', $data);
-		$this->load->view('templates_admin/footer');
+		$this->load->view('templates_hrd/header', $data);
+		$this->load->view('templates_hrd/sidebar');
+		$this->load->view('hrd/dashboard', $data);
+		$this->load->view('templates_hrd/footer');
 	}
 }
 

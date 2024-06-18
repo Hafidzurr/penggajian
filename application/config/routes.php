@@ -55,3 +55,4 @@ $route['translate_uri_dashes'] = FALSE;
 $route['admin/SlipGaji'] = 'admin/SlipGaji/index';
 $route['admin/SlipGaji/generate'] = 'admin/SlipGaji/generate';
 
+
