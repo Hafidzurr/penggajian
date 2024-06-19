@@ -9,7 +9,7 @@
 
 	<div class="card" style="width: 60%; margin: 0 auto;">
 		<div class="card-body">
-			<form method="POST" action="<?php echo base_url('admin/SlipGaji/generate') ?>">
+			<form method="POST" action="<?php echo base_url('hrd/SlipGaji/generate') ?>">
 				<div class="form-group">
 					<label>Pilih Pegawai</label>
 					<select name="Pegawai_NIP" id="Pegawai_NIP" class="form-control">

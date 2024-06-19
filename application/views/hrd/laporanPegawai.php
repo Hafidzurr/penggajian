@@ -2,7 +2,7 @@
 
 	<div class="d-sm-flex align-items-center justify-content-between mb-4">
 		<h1 class="h3 mb-0 text-gray-800"><?php echo $title ?></h1>
-		<form method="GET" action="<?php echo base_url('admin/laporanPegawai/cetak') ?>" target="_blank">
+		<form method="GET" action="<?php echo base_url('hrd/laporanPegawai/cetak') ?>" target="_blank">
 			<input type="hidden" name="bulan" value="<?php echo isset($_POST['bulan']) ? $_POST['bulan'] : '' ?>">
 			<input type="hidden" name="tahun" value="<?php echo isset($_POST['tahun']) ? $_POST['tahun'] : '' ?>">
 			<button type="submit" class="btn btn-sm btn-primary">
@@ -13,7 +13,7 @@
 
 	<div class="card mb-4">
 		<div class="card-body">
-			<form method="POST" action="<?php echo base_url('admin/laporanPegawai/filter') ?>">
+			<form method="POST" action="<?php echo base_url('hrd/laporanPegawai/filter') ?>">
 				<div class="form-group row">
 					<label for="bulan" class="col-sm-2 col-form-label">Bulan Masuk</label>
 					<div class="col-sm-4">

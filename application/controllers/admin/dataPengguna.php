@@ -140,6 +140,19 @@ class DataPengguna extends CI_Controller
 		}
 	}
 
+	public function deleteData($id)
+	{
+		$where = array('ID_Pengguna' => $id);
+		$this->penggajianModel->delete_data($where, 'pengguna');
+		$this->session->set_flashdata('pesan', '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+  <strong>Data Berhasil Dihapus!</strong> 
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>');
+		redirect('admin/DataPengguna');
+	}
+
 	public function _rules()
 	{
 		$this->form_validation->set_rules('Username', 'username', 'required');

@@ -1,6 +1,6 @@
 <?php
 
-class Dashboard extends CI_Controller
+class DataGaji extends CI_Controller
 {
 	public function __construct()
 	{
@@ -11,30 +11,56 @@ class Dashboard extends CI_Controller
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
-        </div>');
+            </div>');
 			redirect('welcome');
 		}
+		$this->load->model('PenggajianModel');
 	}
 
 	public function index()
 	{
-		$data['title'] = "Dashboard";
-		$id = $this->session->userdata('Pegawai_NIP');
+		$data['title'] = "Data Gaji Pegawai";
+		$nip = $this->session->userdata('Pegawai_NIP');
 
-		// Join query to get data from pengguna, pegawai, and jabatan tables
-		$data['pegawai'] = $this->db->query("
-            SELECT pengguna.*, pegawai.NIP, pegawai.Nama, pegawai.Alamat, pegawai.Tanggal_Lahir, pegawai.Tanggal_Masuk, pegawai.Jabatan_ID,
-            jabatan.Nama_Jabatan, jabatan.Bidang
-            FROM pengguna 
-            JOIN pegawai ON pengguna.Pegawai_NIP = pegawai.NIP 
+		$data['gaji'] = $this->db->query("
+            SELECT gaji.*, pegawai.Nama as Nama_Pegawai, jabatan.Nama_Jabatan, jabatan.Bidang
+            FROM gaji 
+            JOIN pegawai ON gaji.Pegawai_NIP = pegawai.NIP 
             JOIN jabatan ON pegawai.Jabatan_ID = jabatan.ID_Jabatan
-            WHERE pengguna.Pegawai_NIP = '$id'
+            WHERE gaji.Pegawai_NIP = '$nip'
         ")->result();
 
 		$this->load->view('templates_pegawai/header', $data);
 		$this->load->view('templates_pegawai/sidebar');
-		$this->load->view('pegawai/dashboard', $data);
+		$this->load->view('pegawai/dataGaji', $data);
 		$this->load->view('templates_pegawai/footer');
 	}
+
+	public function cetakSlip($id_gaji)
+	{
+		$data['title'] = "Slip Gaji Pegawai";
+		$nip = $this->session->userdata('Pegawai_NIP');
+
+		$data['gaji'] = $this->db->query("
+            SELECT gaji.*, pegawai.Nama as Nama_Pegawai, jabatan.Nama_Jabatan, jabatan.Bidang
+            FROM gaji 
+            JOIN pegawai ON gaji.Pegawai_NIP = pegawai.NIP 
+            JOIN jabatan ON pegawai.Jabatan_ID = jabatan.ID_Jabatan
+            WHERE gaji.ID_Gaji = '$id_gaji' AND gaji.Pegawai_NIP = '$nip'
+        ")->row();
+
+		if (!$data['gaji']) {
+			$this->session->set_flashdata('pesan', '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>Data Gaji Tidak Ditemukan!</strong> 
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>');
+			redirect('pegawai/dataGaji');
+		}
+
+		$this->load->view('pegawai/cetakSlip', $data);
+	}
 }
+
 ?>

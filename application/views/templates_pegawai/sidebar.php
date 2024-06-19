@@ -24,8 +24,16 @@
 					<span>Dashboard</span></a>
 			</li>
 
+
 			<li class="nav-item">
-				<a class="nav-link" href="<?php echo base_url('gantiPassword') ?>">
+				<a class="nav-link" href="<?php echo base_url('pegawai/dataGaji') ?>">
+					<i class="fas fa-fw fa-money-check-alt"></i>
+					<span>Data Gaji</span></a>
+			</li>
+
+
+			<li class="nav-item">
+				<a class="nav-link" href="<?php echo base_url('pegawai/gantiPassword') ?>">
 					<i class="fas fa-fw fa-lock"></i>
 					<span>Ganti Password</span></a>
 			</li>
